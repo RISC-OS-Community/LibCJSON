@@ -1,0 +1,8 @@
+Dir <Obey$Dir>
+WimpSlot -min 2048K
+amu all_libs THROWBACK=-throwback -f MakeFileDDE
+
+IFthere @.o.ezinilib Then copy @.o.ezinilib @.^.!LibEzINI.o.ezinilib ~C N
+IFthere @.o.ezinilibzm Then copy @.o.ezinilibzm @.^.!LibEzINI.o.ezinilibzm ~C N
+IFthere @.h.ezini Then copy @.h.ezini @.^.!LibEzINI.h.ezini ~C N
+

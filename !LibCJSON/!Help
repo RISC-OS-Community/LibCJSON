@@ -1,0 +1,32 @@
+---------------------------------------------------------------
+- Lib cJSON port to RISC OS
+- Port by Paolo Fabio Zaino 2021 of cJSON master (above release 1.7.14)
+---------------------------------------------------------------
+
+_ Release 1.0.0 _
+
+-----------------------
+-  DISCLAIMER  -
+-----------------------
+
+This is a port of a Library under MIT license, the port inherits the original license.
+
+-----------------------
+-  Intro  -
+-----------------------
+
+This is a RISC OS port of cJSON library, an ultralightweight JSON parser in written in ANSI C.
+There are different ports/recompilations out there for RISC OS, this one is to make cJSON available as a GCC library for RISC OS on its own and keep maintaining it following the original cJSON commuinity.
+
+If you do not know what JSON is you probably do not need this library either.
+
+If you want to know what JSON and a JSON file are, then pleae have a look at [this wiki page](https://en.wikipedia.org/wiki/JSON).
+
+
+
+---------------
+- FINAL NOTES -
+---------------
+Thanks for evaluating my port and effort and eventually using it in your code, and, most of all, thanks for coding on RISC OS :)
+
+- Paolo

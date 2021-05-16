@@ -1,0 +1,17 @@
+Dir <Obey$Dir>
+WimpSlot -min 16384K
+
+echo [Starting static libraries generation jobs...]
+make static THROWBACK=-throwback -f MakeFileGCC
+
+IFthere @.libcjson/a Then copy @.libcjson/a @.^.!LibCJSON.a.libcjson ~C N
+IFthere @.libcjson_utils/a Then copy @.libcjson_utils/a @.^.!LibCJSON.a.libcjson_utils ~C N
+IFthere @.h.cJSON Then copy @.h.cJSON @.^.!LibCJSON.h.cJSON ~C N
+IFthere @.h.cJSON_Utils Then copy @.h.cJSON_Utils @.^.!LibCJSON.h.cJSON_Utils ~C N
+
+echo [Static libraries jobs completed]
+
+echo [Starting shared libraries generation jobs...]
+make shared THROWBACK=-throwback -f MakeFileGCC
+
+echo [Shared libraries generation jobs completed]
