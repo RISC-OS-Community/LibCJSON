@@ -1,0 +1,6 @@
+| Lib cJSON port to RISC OS
+| by Paolo Fabio Zaino 2021
+
+IconSprites <Obey$Dir>.!Sprites
+Set LibCJSON$Dir <Obey$Dir>
+Set LibCJSON$Path <LibCJSON$Dir>.
