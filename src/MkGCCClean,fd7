@@ -1,0 +1,12 @@
+
+IFthere @.libcjson/a Then Wipe @.libcjson/a ~C F
+IFthere @.libcjson_utils/a Then Wipe @.libcjson_utils/a ~C F
+
+
+IFthere @.libcjson/so* Then Wipe @.libcjson/so* ~C F
+IFthere @.libcjson_utils/so* Then Wipe @.libcjson_utils/so* ~C F
+
+IFthere @.^.!LibCJSON.so.* Then Wipe @.^.!LibCJSON.so.* ~C F
+IFthere @.^.!LibCJSON.a.* Then Wipe @.^.!LibCJSON.a.* ~C F
+
+IfThere @.o Then Wipe @.o ~C F
