@@ -1,8 +1,23 @@
 # cJSON
 
-Ultralightweight JSON parser in ANSI C.
+This is a port of the Ultra lightweight JSON parser in ANSI C to RISC OS Operating System.
+
+This port builds on both GNU GCC and Acorn/ROOL DDE C compilers and come with easy-to-build scripts for both.
+
+**Please Note:** This is not the cJSON original repository, this repository is ONLY for the RISC OS port.
+
+## Building
+
+### GNU GCC
+
+To build with GNU GCC, simply run the `MkGCC` script in `src`. This will build the library and the test program.
+
+### Acorn/ROOL DDE C
+
+To build with Acorn/ROOL DDE C, simply run the `MkDDE` script in `src`. This will build the library and the test program.
 
 ## Table of contents
+
 * [License](#license)
 * [Usage](#usage)
   * [Welcome to cJSON](#welcome-to-cjson)
@@ -37,29 +52,29 @@ Ultralightweight JSON parser in ANSI C.
 
 MIT License
 
->  Copyright (c) 2009-2017 Dave Gamble and cJSON contributors
+> Copyright (c) 2009-2017 Dave Gamble and cJSON contributors
 >
->  Permission is hereby granted, free of charge, to any person obtaining a copy
->  of this software and associated documentation files (the "Software"), to deal
->  in the Software without restriction, including without limitation the rights
->  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
->  copies of the Software, and to permit persons to whom the Software is
->  furnished to do so, subject to the following conditions:
+> Permission is hereby granted, free of charge, to any person obtaining a copy
+> of this software and associated documentation files (the "Software"), to deal
+> in the Software without restriction, including without limitation the rights
+> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+> copies of the Software, and to permit persons to whom the Software is
+> furnished to do so, subject to the following conditions:
 >
->  The above copyright notice and this permission notice shall be included in
->  all copies or substantial portions of the Software.
+> The above copyright notice and this permission notice shall be included in
+> all copies or substantial portions of the Software.
 >
->  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
->  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
->  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
->  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
->  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
->  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
->  THE SOFTWARE.
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+> THE SOFTWARE.
 
 ## Usage
 
-### Welcome to cJSON.
+### Welcome to cJSON
 
 cJSON aims to be the dumbest possible parser that you can get your job done with.
 It's a single file of C, and a single header file.
@@ -76,88 +91,8 @@ I lifted some JSON from this page: http://www.json.org/fatfree.html
 That page inspired me to write cJSON, which is a parser that tries to share the same
 philosophy as JSON itself. Simple, dumb, out of the way.
 
-### Building
 
-There are several ways to incorporate cJSON into your project.
-
-#### copying the source
-
-Because the entire library is only one C file and one header file, you can just copy `cJSON.h` and `cJSON.c` to your projects source and start using it.
-
-cJSON is written in ANSI C (C89) in order to support as many platforms and compilers as possible.
-
-#### CMake
-
-With CMake, cJSON supports a full blown build system. This way you get the most features. CMake with an equal or higher version than 2.8.5 is supported. With CMake it is recommended to do an out of tree build, meaning the compiled files are put in a directory separate from the source files. So in order to build cJSON with CMake on a Unix platform, make a `build` directory and run CMake inside it.
-
-```
-mkdir build
-cd build
-cmake ..
-```
-
-This will create a Makefile and a bunch of other files. You can then compile it:
-
-```
-make
-```
-
-And install it with `make install` if you want. By default it installs the headers `/usr/local/include/cjson` and the libraries to `/usr/local/lib`. It also installs files for pkg-config to make it easier to detect and use an existing installation of CMake. And it installs CMake config files, that can be used by other CMake based projects to discover the library.
-
-You can change the build process with a list of different options that you can pass to CMake. Turn them on with `On` and off with `Off`:
-
-* `-DENABLE_CJSON_TEST=On`: Enable building the tests. (on by default)
-* `-DENABLE_CJSON_UTILS=On`: Enable building cJSON_Utils. (off by default)
-* `-DENABLE_TARGET_EXPORT=On`: Enable the export of CMake targets. Turn off if it makes problems. (on by default)
-* `-DENABLE_CUSTOM_COMPILER_FLAGS=On`: Enable custom compiler flags (currently for Clang, GCC and MSVC). Turn off if it makes problems. (on by default)
-* `-DENABLE_VALGRIND=On`: Run tests with [valgrind](http://valgrind.org). (off by default)
-* `-DENABLE_SANITIZERS=On`: Compile cJSON with [AddressSanitizer](https://github.com/google/sanitizers/wiki/AddressSanitizer) and [UndefinedBehaviorSanitizer](https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html) enabled (if possible). (off by default)
-* `-DENABLE_SAFE_STACK`: Enable the [SafeStack](https://clang.llvm.org/docs/SafeStack.html) instrumentation pass. Currently only works with the Clang compiler. (off by default)
-* `-DBUILD_SHARED_LIBS=On`: Build the shared libraries. (on by default)
-* `-DBUILD_SHARED_AND_STATIC_LIBS=On`: Build both shared and static libraries. (off by default)
-* `-DCMAKE_INSTALL_PREFIX=/usr`: Set a prefix for the installation.
-* `-DENABLE_LOCALES=On`: Enable the usage of localeconv method. ( on by default )
-* `-DCJSON_OVERRIDE_BUILD_SHARED_LIBS=On`: Enable overriding the value of `BUILD_SHARED_LIBS` with `-DCJSON_BUILD_SHARED_LIBS`.
-
-If you are packaging cJSON for a distribution of Linux, you would probably take these steps for example:
-```
-mkdir build
-cd build
-cmake .. -DENABLE_CJSON_UTILS=On -DENABLE_CJSON_TEST=Off -DCMAKE_INSTALL_PREFIX=/usr
-make
-make DESTDIR=$pkgdir install
-```
-
-On Windows CMake is usually used to create a Visual Studio solution file by running it inside the Developer Command Prompt for Visual Studio, for exact steps follow the official documentation from CMake and Microsoft and use the online search engine of your choice. The descriptions of the the options above still generally apply, although not all of them work on Windows.
-
-#### Makefile
-
-**NOTE:** This Method is deprecated. Use CMake if at all possible. Makefile support is limited to fixing bugs.
-
-If you don't have CMake available, but still have GNU make. You can use the makefile to build cJSON:
-
-Run this command in the directory with the source code and it will automatically compile static and shared libraries and a little test program (not the full test suite).
-
-```
-make all
-```
-
-If you want, you can install the compiled library to your system using `make install`. By default it will install the headers in `/usr/local/include/cjson` and the libraries in `/usr/local/lib`. But you can change this behavior by setting the `PREFIX` and `DESTDIR` variables: `make PREFIX=/usr DESTDIR=temp install`. And uninstall them with: `make PREFIX=/usr DESTDIR=temp uninstall`.
-
-#### Vcpkg
-
-You can download and install cJSON using the [vcpkg](https://github.com/Microsoft/vcpkg) dependency manager:
-```
-git clone https://github.com/Microsoft/vcpkg.git
-cd vcpkg
-./bootstrap-vcpkg.sh
-./vcpkg integrate install
-vcpkg install cjson
-```
-
-The cJSON port in vcpkg is kept up to date by Microsoft team members and community contributors. If the version is out of date, please [create an issue or pull request](https://github.com/Microsoft/vcpkg) on the vcpkg repository.
-
-### Including cJSON
+## Including cJSON
 
 If you installed it via CMake or the Makefile, you can include cJSON like this:
 
@@ -564,8 +499,9 @@ When cJSON was originally created, it didn't follow the JSON standard and didn't
 
 cJSON supports parsing and printing JSON that contains objects that have multiple members with the same name. `cJSON_GetObjectItemCaseSensitive` however will always only return the first one.
 
-# Enjoy cJSON!
+## Enjoy cJSON
 
-- Dave Gamble (original author)
-- Max Bruckner and Alan Wang (current maintainer)
-- and the other [cJSON contributors](CONTRIBUTORS.md)
+* Dave Gamble (original author)
+* Max Bruckner and Alan Wang (current maintainers of the original cJSON repository)
+* and the other [cJSON contributors](CONTRIBUTORS.md)
+* RISC OS Port by Paolo Fabio Zaino
