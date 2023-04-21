@@ -1,3 +1,5 @@
+Dir <Obey$Dir>
+WimpSlot -min 2048k
 
 IFthere @.libcjson/a Then Wipe @.libcjson/a ~C F
 IFthere @.libcjson_utils/a Then Wipe @.libcjson_utils/a ~C F
