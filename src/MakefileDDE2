@@ -1,0 +1,10 @@
+# Makefile for cJSON_Utils library
+
+COMPONENT = cJSON_Utils
+
+# This is a list of source/object files for the library, only 1 in this simple example
+OBJS = cJSON_Utils
+
+include CLibrary
+
+# Dynamic dependencies:

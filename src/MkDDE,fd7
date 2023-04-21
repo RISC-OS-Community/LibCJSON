@@ -1,0 +1,21 @@
+Dir <Obey$Dir>
+WimpSlot -min 2048K
+amu all_libs THROWBACK=-throwback -f MakeFileDDE1
+amu all_libs THROWBACK=-throwback -f MakeFileDDE2
+
+echo Creating required subdirectories in the App structure
+IFThere @.^.!LibCJSON.o Then Else CDir @.^.!LibCJSON.o
+IFThere @.^.!LibCJSON.h Then Else CDir @.^.!LibCJSON.h
+echo done
+
+echo Installing cJSON library in the App structure...
+IFthere @.oz.cJSON Then copy @.oz.cJSON @.^.!LibCJSON.o.cJSONlib ~C N
+IFthere @.o.cJSONzm Then copy @.o.cJSONzm @.^.!LibCJSON.o.cJSONlibzm ~C N
+IFthere @.h.cJSON Then copy @.h.cJSON @.^.!LibCJSON.h.cJSON ~C N
+echo done
+
+echo Installing cJSON_Utils library in the App structure...
+IFthere @.oz.cJSON_Utils Then copy @.oz.cJSON_Utils @.^.!LibCJSON.o.cJSONlib_utils ~C N
+IFthere @.o.cJSON_Utilszm Then copy @.o.cJSON_Utilszm @.^.!LibCJSON.o.cJSONlib_Utilszm ~C N
+IFthere @.h.cJSON_Utils Then copy @.h.cJSON_Utils @.^.!LibCJSON.h.cJSON_Utils ~C N
+echo done

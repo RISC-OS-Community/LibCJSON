@@ -1,0 +1,9 @@
+Dir <Obey$Dir>
+WimpSlot -min 2048k
+amu clean -f MakeFileDDE1
+stripdepnd MakeFileDDE1
+amu clean -f MakeFileDDE2
+stripdepnd MakeFileDDE2
+IFThere @.^.!LibCJSON.o.* Then Wipe @.^.!LibCJSON.o.* ~C F
+
+
