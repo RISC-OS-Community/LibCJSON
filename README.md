@@ -12,9 +12,17 @@ This port builds on both GNU GCC and Acorn/ROOL DDE C compilers and come with ea
 
 To build with GNU GCC, simply run the `MkGCC` script in `src`. This will build the library and the test program.
 
-### Acorn/ROOL DDE C
+### Acorn ROOL DDE C
 
 To build with Acorn/ROOL DDE C, simply run the `MkDDE` script in `src`. This will build the library and the test program.
+
+### Packaging
+
+Whichever build method you use, the relative produced binary files will be automatically added to the `!LibCJSON` directory in their appropriate subdirectories.
+
+So, for example, if you build with GNU GCC, the static `cJSON` library will be placed in `!LibCJSON.a` and the DLL in `!LibCJSON.so`. If you build with Acorn/ROOL DDE C, the static `cJSON` library will be placed in `!LibCJSON.o`.
+
+To use the DLL you should probably copy them into your !SharedLibs in your !Boot directory. I'll leave that up to you and also, if you use the DLL version, you should probably make sure that you distribute the DLL with your application. If you use the static version, you don't need to worry about that.
 
 ## Table of contents
 
@@ -22,10 +30,9 @@ To build with Acorn/ROOL DDE C, simply run the `MkDDE` script in `src`. This wil
 * [Usage](#usage)
   * [Welcome to cJSON](#welcome-to-cjson)
   * [Building](#building)
-    * [Copying the source](#copying-the-source)
-    * [CMake](#cmake)
-    * [Makefile](#makefile)
-    * [Vcpkg](#Vcpkg)
+    * [GNU GCC](#gnu-gcc)
+    * [Acorn/ROOL DDE C](#acorn-rool-dde-c)
+    * [Packaging](#packaging)
   * [Including cJSON](#including-cjson)
   * [Data Structure](#data-structure)
   * [Working with the data structure](#working-with-the-data-structure)
@@ -91,13 +98,24 @@ I lifted some JSON from this page: http://www.json.org/fatfree.html
 That page inspired me to write cJSON, which is a parser that tries to share the same
 philosophy as JSON itself. Simple, dumb, out of the way.
 
-
 ## Including cJSON
 
 If you installed it via CMake or the Makefile, you can include cJSON like this:
 
 ```c
-#include <cjson/cJSON.h>
+#include "LibCJSON:cJSON.h"
+```
+
+Then depending on the compiler and the build type, you can link against the static or dynamic library. For example, if you built with GNU GCC, you can link against the static library like this:
+
+```Makefile
+gcc -o myapp myapp.c -L LibCJSON:LibCJSON.a
+```
+
+If instead you are using DDE C, you can link against the static library like this:
+
+```Makefile
+link -o myapp o.myapp LibCJSON:o.LibCJSON
 ```
 
 ### Data Structure
@@ -146,7 +164,7 @@ Additionally there are the following two flags:
 For every value type there is a `cJSON_Create...` function that can be used to create an item of that type.
 All of these will allocate a `cJSON` struct that can later be deleted with `cJSON_Delete`.
 Note that you have to delete them at some point, otherwise you will get a memory leak.  
-**Important**: If you have added an item to an array or an object already, you **mustn't** delete it with `cJSON_Delete`. Adding it to an array or object transfers its ownership so that when that array or object is deleted, 
+**Important**: If you have added an item to an array or an object already, you **mustn't** delete it with `cJSON_Delete`. Adding it to an array or object transfers its ownership so that when that array or object is deleted,
 it gets deleted as well. You also could use `cJSON_SetValuestring` to change a `cJSON_String`'s `valuestring`, and you needn't to free the previous `valuestring` manually.
 
 #### Basic types
