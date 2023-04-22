@@ -86,7 +86,7 @@ MIT License
 cJSON aims to be the dumbest possible parser that you can get your job done with.
 It's a single file of C, and a single header file.
 
-JSON is described best here: http://www.json.org/
+JSON is described best [here](http://www.json.org/).
 It's like XML, but fat-free. You use it to move data around, store things, or just
 generally represent your program's state.
 
@@ -94,13 +94,13 @@ As a library, cJSON exists to take away as much legwork as it can, but not get i
 As a point of pragmatism (i.e. ignoring the truth), I'm going to say that you can use it
 in one of two modes: Auto and Manual. Let's have a quick run-through.
 
-I lifted some JSON from this page: http://www.json.org/fatfree.html
+I lifted some JSON from this [page](http://www.json.org/fatfree.html).
 That page inspired me to write cJSON, which is a parser that tries to share the same
 philosophy as JSON itself. Simple, dumb, out of the way.
 
 ## Including cJSON
 
-If you installed it via CMake or the Makefile, you can include cJSON like this:
+If you have made your RISC OS Filer see !LibCJSON, you can include cJSON like this:
 
 ```c
 #include "LibCJSON:cJSON.h"
