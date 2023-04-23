@@ -9,13 +9,13 @@ IFThere @.^.!LibCJSON.h Then Else CDir @.^.!LibCJSON.h
 echo done
 
 echo Installing cJSON library in the App structure...
-IFthere @.oz.cJSON Then copy @.oz.cJSON @.^.!LibCJSON.o.cJSONlib ~C N
-IFthere @.o.cJSONzm Then copy @.o.cJSONzm @.^.!LibCJSON.o.cJSONlibzm ~C N
-IFthere @.h.cJSON Then copy @.h.cJSON @.^.!LibCJSON.h.cJSON ~C N
+IFthere @.o.cJSONlib Then copy @.o.cJSONlib @.^.!LibCJSON.o.* ~C N
+IFthere @.o.cJSONlibzm Then copy @.o.cJSONlibzm @.^.!LibCJSON.o.* ~C N
+IFthere @.h.cJSON Then copy @.h.cJSON @.^.!LibCJSON.h.* ~C N
 echo done
 
 echo Installing cJSON_Utils library in the App structure...
-IFthere @.oz.cJSON_Utils Then copy @.oz.cJSON_Utils @.^.!LibCJSON.o.cJSONlib_utils ~C N
-IFthere @.o.cJSON_Utilszm Then copy @.o.cJSON_Utilszm @.^.!LibCJSON.o.cJSONlib_Utilszm ~C N
-IFthere @.h.cJSON_Utils Then copy @.h.cJSON_Utils @.^.!LibCJSON.h.cJSON_Utils ~C N
+IFthere @.o.cJSONlib_Utils Then copy @.o.cJSONlib_Utils @.^.!LibCJSON.o.* ~C N
+IFthere @.o.cJSONlib_Utilszm Then copy @.o.cJSONlib_Utilszm @.^.!LibCJSON.o.* ~C N
+IFthere @.h.cJSON_Utils Then copy @.h.cJSON_Utils @.^.!LibCJSON.h.* ~C N
 echo done

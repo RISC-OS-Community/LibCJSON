@@ -115,8 +115,10 @@ gcc -o myapp myapp.c -L LibCJSON:LibCJSON.a
 If instead you are using DDE C, you can link against the static library like this:
 
 ```Makefile
-link -o myapp o.myapp LibCJSON:o.LibCJSON
+link -o myapp o.myapp LibCJSON:o.CJSONlib
 ```
+
+Same goes for the cJSON_Utils library.
 
 ### Data Structure
 

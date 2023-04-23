@@ -1,4 +1,12 @@
 Dir <Obey$Dir>
 WimpSlot -min 2048K
-amu export_hdrs LIBDIR=Export -f MakeFileDDE
-amu export_libs LIBDIR=Export THROWBACK=-throwback -f MakeFileDDE
+amu export_hdrs LIBDIR=Export -f MakeFileDDE1
+amu export_libs LIBDIR=Export THROWBACK=-throwback -f MakeFileDDE1
+
+amu export_hdrs LIBDIR=Export -f MakeFileDDE2
+amu export_libs LIBDIR=Export THROWBACK=-throwback -f MakeFileDDE2
+
+IFthere @.h.cJSON Then copy @.h.cJSON @.Export.cJSONlib.h.* ~C N
+
+IFthere @.h.cJSON_Utils Then copy @.h.cJSON_Utils @.Export.cJSONlib_Utils.h.* ~C N
+
