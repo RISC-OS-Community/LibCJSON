@@ -126,7 +126,8 @@ then
     then
         ln -s ${curr_dir}/src/MkGCC.sh ${curr_dir}/ux-src/MkGCC.sh
     fi
-
+    
+    ls -l ${curr_dir}/ux-src
 else
     # Remove existing ux-src
     if [ -d ${curr_dir}/ux-src ]
