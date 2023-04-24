@@ -35,8 +35,16 @@ jobs:
       - name: flawfinder_scan
         uses: david-a-wheeler/flawfinder@8e4a779ad59dbfaee5da586aa9210853b701959c
         with:
-          arguments: '--sarif ./'
+          arguments: '--sarif ./ux-src/'
           output: 'flawfinder_results.sarif'
+
+      - name: Check results
+        run: |
+          ls ./
+          if [ ! -f ./results ];
+          then
+            cp ./flawfinder_results.sarif ../results
+          fi
 
       - name: Upload analysis results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
