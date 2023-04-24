@@ -23,7 +23,8 @@
 ####################
 
 cmd="$1"
-curr_dir="$2"
+env="$2"
+curr_dir="$3"
 if [ "${curr_dir}" == "" ]
 then
     curr_dir="$(pwd)"
@@ -49,7 +50,13 @@ function link_files()
                 continue
             else
                 fname="$(basename ${f})"
-                ln -s ${f} ${curr_dir}/ux-src/${fname}.${f_ext}
+                if [ "${env}" == "github" ] 
+                then
+                    # GitHub Actions do not support symlinks:
+                    cp ${f} ${curr_dir}/ux-src/${fname}.${f_ext}
+                else
+                    ln -s ${f} ${curr_dir}/ux-src/${fname}.${f_ext}
+                fi
             fi
         done
     fi
@@ -79,6 +86,8 @@ fi
 # Run the command:
 if [ "$cmd" == "gen" ]
 then
+    echo "Generating ux-src directory in ${curr_dir}"
+    
     # Generate ux-src:
     mkdir ${curr_dir}/ux-src
 
@@ -118,25 +127,45 @@ then
     for f in ${curr_dir}/src/Makefile*
     do
         fname="$(basename ${f})"
-        ln -s ${f} ${curr_dir}/ux-src/${fname}
+        if [ "$env" == "github" ]
+        then
+            # GitHub Actions do not support symlinks:
+            cp ${f} ${curr_dir}/ux-src/${fname}
+        else
+            ln -s ${f} ${curr_dir}/ux-src/${fname}
+        fi
     done
 
     # Link the Build Script for Unix:
     if [ -f ${curr_dir}/src/MkGCC.sh ]
     then
-        ln -s ${curr_dir}/src/MkGCC.sh ${curr_dir}/ux-src/MkGCC.sh
+        if [ "$env" == "github" ]
+        then
+            # GitHub Actions do not support symlinks:
+            cp ${curr_dir}/src/MkGCC.sh ${curr_dir}/ux-src/MkGCC.sh
+        else
+            ln -s ${curr_dir}/src/MkGCC.sh ${curr_dir}/ux-src/MkGCC.sh
+        fi
     fi
 
+    ls -l ${curr_dir}/ux-src
 else
     # Remove existing ux-src
     if [ -d ${curr_dir}/ux-src ]
     then
         for f in ${curr_dir}/ux-src/*
         do
-            unlink ${f}
+            if [ "$env" == "github" ]
+            then
+                # GitHub Actions do not support symlinks:
+                rm -f ${f}
+            else
+                unlink ${f}
+            fi
         done
         rm -rf ${curr_dir}/ux-src
     fi
 
 fi
 
+exit $?
