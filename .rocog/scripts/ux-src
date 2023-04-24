@@ -30,6 +30,7 @@ then
     curr_dir="$(pwd)"
 fi
 
+# Display command usage:
 function usage()
 {
     echo "Usage: ux-src [gen|clean] [path]"
@@ -37,6 +38,7 @@ function usage()
     echo "clean: remove ux-src directory"
 }
 
+# Link files from directory f_dir to directory ux-src with extension f_ext:
 function link_files()
 {
     f_dir="$1"
@@ -62,6 +64,7 @@ function link_files()
     fi
 }
 
+# Check command line syntax:
 function check_cmd()
 {
     if [ "$cmd" != "gen" ] && [ "$cmd" != "clean" ]
@@ -71,7 +74,9 @@ function check_cmd()
     fi
 }
 
+#################
 # Main program
+#################
 
 # Check commadn line syntax:
 check_cmd
@@ -93,31 +98,44 @@ then
 
     # Link C files (if any):
     link_files "c" "c"
+    link_files "C" "c"
 
     # Link C++ files (if any):
     link_files "cpp" "cpp"
-    link_files "cxx" "cpp"
-    link_files "cc"  "cpp"
+    link_files "CPP" "cpp"
+    link_files "cxx" "cxx"
+    link_files "CXX" "cxx"
+    link_files "cc"  "cc"
+    link_files "CC"  "cc"
     link_files "c++" "cpp"
+    link_files "C++" "cpp"
 
     # Link C++ header files (if any):
     link_files "hpp" "hpp"
+    link_files "HPP" "hpp"
+    link_files "hxx" "hxx"
+    link_files "HXX" "hxx"
 
     # Link C header files (if any):
     link_files "h" "h"
+    link_files "H" "h"
 
     # Link Assembler files (if any):
     link_files "s" "s"
+    link_files "S" "s"
     link_files "Hdr" "s"
 
     # Link Forth files (if any):
     link_files "fth" "fth"
+    link_files "FTH" "fth"
 
     # Link Pascal and Prolog files (if any):
     link_files "p" "p"
+    link_files "P" "p"
 
     # Link Perl files (if any):
     link_files "pl" "pl"
+    link_files "PL" "pl"
 
     # Link BASIC files (if any):
     link_files "bas" "bas"
