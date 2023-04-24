@@ -18,7 +18,7 @@
 # the above will create ux-src in your local directory and will link all your source files
 # ina UNIXy way.
 # To remove ux-src directory type:
-# ux-src 
+# ux-src clean
 # And, if the directory exists in your pwd then it will be removed.
 ####################
 
@@ -26,21 +26,88 @@ cmd="$1"
 
 curr_dir="$(pwd)"
 
+function usage()
+{
+    echo "Usage: ux-src [gen|clean]"
+    echo "gen: generate ux-src directory"
+    echo "clean: remove ux-src directory"
+}
+
+function link_files()
+{
+    file_dir$="$1"
+    file_ext$="$2"
+    if [ -d ${curr_dir}/src/${file_dir} ]
+    then
+        for f in ${curr_dir}/src/${file_dir}/*
+        do
+            fname="$(basename ${f})"
+            ln -s ${f} ${curr_dir}/ux-src/${fname}.${file_ext}
+        done
+    fi
+}
+
+function check_cmd()
+{
+    if [ "$cmd" != "gen" ] && [ "$cmd" != "clean" ]
+    then
+        usage
+        exit 1
+    fi
+}
+
+# Main program
+
+# Check commadn line syntax:
+check_cmd
+
+# Check if we are in a RISC OS source tree:
+if [ ! -d ${curr_dir}/src ]
+then
+    echo "Error: you are not in a RISC OS source tree"
+    exit 1
+fi
+
+# Run the command:
 if [ "$cmd" == "gen" ]
 then
-
     # Generate ux-src:
     mkdir ${curr_dir}/ux-src
-    for f in ${curr_dir}/src/c/*
-    do
-        fname="$(basename ${f})"
-        ln -s ${f} ${curr_dir}/ux-src/${fname}.c
-    done
-    for f in ${curr_dir}/src/h/*
-    do
-        fname="$(basename ${f})"
-        ln -s ${f} ${curr_dir}/ux-src/${fname}.h
-    done
+
+    # Link C files (if any):
+    link_files "c" "c"
+
+    # Link C++ files (if any):
+    link_files "cpp" "cpp"
+    link_files "cxx" "cpp"
+    link_files "cc"  "cpp"
+    link_files "c++" "cpp"
+
+    # Link C++ header files (if any):
+    link_files "hpp" "hpp"
+
+    # Link C header files (if any):
+    link_files "h" "h"
+
+    # Link Assembler files (if any):
+    link_files "s" "s"
+    link_files "Hdr" "s"
+
+
+    # Link Forth files (if any):
+    link_files "fth" "fth"
+
+    # Link Pascal and Prolog files (if any):
+    link_files "p" "p"
+
+    # Link Perl files (if any):
+    link_files "pl" "pl"
+
+    # Link BASIC files (if any):
+    link_files "bas" "bas"
+    link_files "BAS" "bas"
+
+    # Link Makefiles
     for f in ${curr_dir}/src/Makefile*
     do
         fname="$(basename ${f})"
@@ -48,7 +115,6 @@ then
     done
 
 else
-
     # Remove existing ux-src
     if [ -d ${curr_dir}/ux-src ]
     then
