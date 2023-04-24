@@ -42,6 +42,10 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
 
+    permissions:
+      actions: write
+      pull-requests: write
+
     steps:
       # Clone the template repository
       - name: Check out template repository
