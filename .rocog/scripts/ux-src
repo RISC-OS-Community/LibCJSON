@@ -86,6 +86,8 @@ fi
 # Run the command:
 if [ "$cmd" == "gen" ]
 then
+    echo "Generating ux-src directory in ${curr_dir}"
+    
     # Generate ux-src:
     mkdir ${curr_dir}/ux-src
 
