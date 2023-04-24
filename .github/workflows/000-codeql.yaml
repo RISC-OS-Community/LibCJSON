@@ -57,10 +57,6 @@ jobs:
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
-    # We need to setup RISC OS code into a non RISC OS source tree
-    - name: Setup RISC OS code
-      run: bash ${GITHUB_WORKSPACE}/.rocog/scripts/ux-src gen github ${GITHUB_WORKSPACE}
-
     # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
     #- name: Autobuild
@@ -72,8 +68,8 @@ jobs:
     #   If the Autobuild fails above, remove it and uncomment the following three lines.
     #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
 
-    - name: Build Code
-      run: |
+    - run: bash ${GITHUB_WORKSPACE}/.rocog/scripts/ux-src gen github ${GITHUB_WORKSPACE}
+    - run: |
          echo "Run, Build Application using script"
          ${GITHUB_WORKSPACE}/ux-src/MkGCC.sh ${GITHUB_WORKSPACE}/ux-src
 
