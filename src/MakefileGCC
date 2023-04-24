@@ -39,7 +39,7 @@ CC = gcc -std=c89
 PIC_FLAGS = -fPIC
 R_CFLAGS = $(PIC_FLAGS) -pedantic -Wall -Werror -Wstrict-prototypes -Wwrite-strings -Wshadow -Winit-self -Wcast-align -Wformat=2 -Wmissing-prototypes -Wstrict-overflow=2 -Wcast-qual -Wc++-compat -Wundef -Wswitch-default -Wconversion $(CFLAGS)
 
-uname := "RISC OS"
+uname := $(OS)
 
 #library file extensions
 SHARED = so
