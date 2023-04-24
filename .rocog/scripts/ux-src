@@ -1,0 +1,63 @@
+#!/bin/bash
+
+###################
+#        name: ux-src
+# description: SImple script to generate a UNIX-friendly structure from a RISC OS source tree
+#      author: Paolo Fabio Zaino
+#     license: Copyright by Paolo Fabio Zaino, all rights reserved
+#              distributed under CDDL v1.1
+# 
+# Long description:
+# This script is used to generate a temporary (and not pushable) ux-src directory
+# that will be used to reconfigure your source code in a way that is "usable" by
+# Linux/BSD based tools for code analysis, SAST etc.
+#
+# Usage:
+# To use this script it's easy:
+# ux-src gen 
+# the above will create ux-src in your local directory and will link all your source files
+# ina UNIXy way.
+# To remove ux-src directory type:
+# ux-src 
+# And, if the directory exists in your pwd then it will be removed.
+####################
+
+cmd="$1"
+
+curr_dir="$(pwd)"
+
+if [ "$cmd" == "gen" ]
+then
+
+    # Generate ux-src:
+    mkdir ${curr_dir}/ux-src
+    for f in ${curr_dir}/src/c/*
+    do
+        fname="$(basename ${f})"
+        ln -s ${f} ${curr_dir}/ux-src/${fname}.c
+    done
+    for f in ${curr_dir}/src/h/*
+    do
+        fname="$(basename ${f})"
+        ln -s ${f} ${curr_dir}/ux-src/${fname}.h
+    done
+    for f in ${curr_dir}/src/Makefile*
+    do
+        fname="$(basename ${f})"
+        ln -s ${f} ${curr_dir}/ux-src/${fname}
+    done
+
+else
+
+    # Remove existing ux-src
+    if [ -d ${curr_dir}/ux-src ]
+    then
+        for f in ${curr_dir}/ux-src/*
+        do
+            unlink ${f}
+        done
+        rm -rf ${curr_dir}/ux-src
+    fi
+
+fi
+
