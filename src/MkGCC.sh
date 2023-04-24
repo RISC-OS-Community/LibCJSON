@@ -10,3 +10,4 @@ cat ${current_dir}/MakeFileGCC
 
 # Make the artifacts
 make static OS=`uname -s` -f ${current_dir}/MakefileGCC
+
