@@ -74,7 +74,7 @@ jobs:
     - name: Build Code
       run: |
          echo "Run, Build Application using script"
-         ${GITHUB_WORKSPACE}/ux-src/MkGCC.sh
+         ${GITHUB_WORKSPACE}/ux-src/MkGCC.sh ${GITHUB_WORKSPACE}/ux-src
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
