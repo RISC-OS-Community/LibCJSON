@@ -59,7 +59,7 @@ jobs:
 
     # We need to setup RISC OS code into a non RISC OS source tree
     - name: Setup RISC OS code
-      run: bash ${GITHUB_WORKSPACE}/.rocog/scripts/ux-src gen ${GITHUB_WORKSPACE}
+      run: bash ${GITHUB_WORKSPACE}/.rocog/scripts/ux-src gen github ${GITHUB_WORKSPACE}
 
     # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
     # If this step fails, then you should remove it and run the build manually (see below)
