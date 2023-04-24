@@ -121,6 +121,12 @@ then
         ln -s ${f} ${curr_dir}/ux-src/${fname}
     done
 
+    # Link the Build Script for Unix:
+    if [ -f ${curr_dir}/src/MkGCC.sh ]
+    then
+        ln -s ${curr_dir}/src/MkGCC.sh ${curr_dir}/ux-src/MkGCC.sh
+    fi
+
 else
     # Remove existing ux-src
     if [ -d ${curr_dir}/ux-src ]
