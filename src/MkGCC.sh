@@ -4,4 +4,4 @@ if [ "$current_dir" == "" ]; then
     current_dir="$(pwd)"
 fi
 cd ${current_dir}
-make static OS=`uname -s` -f ./MakeFileGCC
+make static OS=`uname -s` -f ${current_dir}/MakeFileGCC
