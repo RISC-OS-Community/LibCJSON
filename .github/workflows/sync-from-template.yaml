@@ -42,6 +42,12 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
 
+    permissions:
+      actions: write
+      pull-requests: write
+      contents: write
+      repository-projects: write
+
     steps:
       # Clone the template repository
       - name: Check out template repository
@@ -78,8 +84,8 @@ jobs:
         run: |
           _files="$(find ${REPO_TEMPLATE} \
             ! -path "*/.git/*" \
-            ! -path "*/.github/workflows/*" \
             ! -name ".gitignore" \
+            ! -path "*/.github/workflows/*" \
             ! -name "README.md" \
             -type f \
             -print)"
