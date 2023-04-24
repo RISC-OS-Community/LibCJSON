@@ -2,7 +2,7 @@ Dir <Obey$Dir>
 WimpSlot -min 16384K
 
 echo [Starting static libraries generation jobs...]
-make static THROWBACK=-throwback -f MakeFileGCC
+make static OS=RISC_OS THROWBACK=-throwback -f MakeFileGCC
 echo [Static libraries jobs completed]
 
 echo [Libraries subdirectories creation in the App structure...]
@@ -21,7 +21,7 @@ IFthere @.h.cJSON_Utils Then copy @.h.cJSON_Utils @.^.!LibCJSON.h.cJSON_Utils ~C
 echo [Static libraries installation jobs completed]
 
 echo [Starting shared libraries generation jobs...]
-make shared THROWBACK=-throwback -f MakeFileGCC
+make shared OS=RISC_OS THROWBACK=-throwback -f MakeFileGCC
 echo [Shared libraries generation jobs completed]
 
 echo [Dynamic libraries installation in the App Structure...]
