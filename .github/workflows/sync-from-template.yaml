@@ -45,6 +45,9 @@ jobs:
     permissions:
       actions: write
       pull-requests: write
+      contents: write
+      repository-projects: write
+      id-token: read
 
     steps:
       # Clone the template repository
