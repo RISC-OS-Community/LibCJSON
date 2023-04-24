@@ -85,6 +85,7 @@ jobs:
           _files="$(find ${REPO_TEMPLATE} \
             ! -path "*/.git/*" \
             ! -name ".gitignore" \
+            ! -path "*/.github/workflows/*" \
             ! -name "README.md" \
             -type f \
             -print)"
